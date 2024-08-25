@@ -1,0 +1,35 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'jacoco'
+}
+
+gradlePlugin {
+    plugins {
+        testReportPlugins {
+            id = "testReport"
+            implementationClass = "plugin.TestReportPlugin"
+        }
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+test {
+    finalizedBy jacocoTestReport//всегда после запуска тестов
+}
+
+subprojects {
+    apply plugin: 'jacoco'
+    jacocoTestReport {
+        reports {
+            xml.required = false
+            csv.required = false
+            html.required = true
+        }
+    }
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+}

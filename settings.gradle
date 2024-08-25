@@ -1,0 +1,4 @@
+rootProject.name = 'gradle-clevertec'
+include 'core'
+include 'api'
+
